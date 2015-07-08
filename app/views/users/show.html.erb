@@ -1,0 +1,17 @@
+<h1>My bot rentals</h1>
+<% current_user.bots.each do |bot| %>
+<%= bot.name %>
+<br>
+<%= bot.description %>
+<br>
+<% bot.rentals.each do |rental| %>
+Rented by: <%= User.find(rental.user_id) %>
+<br>
+<% end %>
+<% end %>
+
+<h1>My rentals</h1>
+<% current_user.rentals.each do |rental| %>
+<%= Bot.find(rental.bot_id).name %>
+<br>
+<% end %>

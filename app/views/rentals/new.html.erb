@@ -1,0 +1,6 @@
+<%= form_for @rental do |f| %>
+  <%= f.label :date %>
+  <%= f.date_select :date %>
+  <%= f.hidden_field :bot_id, value: params[:bot_id] %>
+  <%= f.submit %>
+<% end %>

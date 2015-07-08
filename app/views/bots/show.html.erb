@@ -1,0 +1,8 @@
+<h1><%= @bot.name %> </h1>
+
+<h2>Description: <%= @bot.description %></h2>
+<% if current_user.id === @bot.user_id %>
+<%= link_to "Edit Bot", edit_bot_path %>
+<% else %>
+<%= link_to "Rent This Bot", new_bot_rental_path(bot_id: @bot.id)%>
+<% end %>

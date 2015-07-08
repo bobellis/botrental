@@ -1,0 +1,9 @@
+<h1>New Bot</h1>
+
+<%= form_for @bot do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.submit %>
+<% end %>
