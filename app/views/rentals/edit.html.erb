@@ -1,0 +1,10 @@
+<%= form_for [@bot, @rental] do |f| %>
+  <%= f.label :review_title %>
+  <%= f.text_field :review_title %>
+  <%= f.label :review_body %>
+  <%= f.text_field :review_body %>
+  <%= f.label :review_score %>
+  <%= f.select :review_score, (0..10) %>
+  <%= f.hidden_field :bot_id, value: params[:bot_id] %>
+  <%= f.submit %>
+<% end %>

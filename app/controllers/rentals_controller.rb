@@ -1,6 +1,7 @@
 class RentalsController < ApplicationController
 
 def new
+  @bot = Bot.find(params[:bot_id])
   @rental = Rental.new
 end
 
@@ -16,9 +17,27 @@ def show
   @rental = Rental.find(params[:id])
 end
 
+def edit
+  @rental = Rental.find(params[:id])
+  @bot = Bot.find(@rental.bot_id)
+end
+
+def update
+  @bot = Bot.find(params[:bot_id])
+  @rental = Rental.find(params[:id])
+  @rental.update(rental_params)
+  if @rental.save
+    flash[:notice] = "Your review has been posted."
+    redirect_to bot_path(@bot)
+  else
+    render :edit
+  end
+end
+
+
 private
   def rental_params
-    params.require(:rental).permit(:date, :bot_id)
+    params.require(:rental).permit(:date, :bot_id, :review_title, :review_body, :review_score)
   end
 
 end

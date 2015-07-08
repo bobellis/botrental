@@ -6,6 +6,7 @@ class BotsController < ApplicationController
 
   def show
     @bot = Bot.find(params[:id])
+    @reviews = @bot.rentals.where("review_title != ''")
   end
 
   def new
@@ -49,6 +50,6 @@ class BotsController < ApplicationController
 
   private
   def bot_params
-    params.require(:bot).permit(:name, :description)
+    params.require(:bot).permit(:name, :description, :image)
   end
 end

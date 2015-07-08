@@ -1,4 +1,4 @@
-<%= form_for @rental do |f| %>
+<%= form_for [@bot, @rental] do |f| %>
   <%= f.label :date %>
   <%= f.date_select :date %>
   <%= f.hidden_field :bot_id, value: params[:bot_id] %>

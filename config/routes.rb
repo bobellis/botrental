@@ -12,11 +12,9 @@ Rails.application.routes.draw do
   resources :bots do
     resources :rentals
   end
-  resources :rentals
 
-  resources :users do
-    resources :rentals
-  end
+  resources :users
 
+  resources :favorites
 
 end

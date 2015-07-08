@@ -1,11 +1,11 @@
-<h1>My bot rentals</h1>
+<h1>My bots</h1>
 <% current_user.bots.each do |bot| %>
 <%= bot.name %>
 <br>
 <%= bot.description %>
 <br>
 <% bot.rentals.each do |rental| %>
-Rented by: <%= User.find(rental.user_id) %>
+Rented by: <%= User.find(rental.user_id).email %>
 <br>
 <% end %>
 <% end %>
@@ -13,5 +13,12 @@ Rented by: <%= User.find(rental.user_id) %>
 <h1>My rentals</h1>
 <% current_user.rentals.each do |rental| %>
 <%= Bot.find(rental.bot_id).name %>
+<%= link_to "Write A Review", edit_bot_rental_path(Bot.find(rental.bot_id), rental) %>
+<br>
+<% end %>
+
+<h1>My Favorites</h1>
+<% current_user.favorites.each do |favorite| %>
+<%= link_to Bot.find(favorite.bot_id).name, bot_path(favorite.bot_id) %>
 <br>
 <% end %>
