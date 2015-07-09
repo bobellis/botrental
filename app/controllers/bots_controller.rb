@@ -1,7 +1,8 @@
 class BotsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
   def index
-    @bots = Bot.all
+    @bots = Bot.order(sort_column + " " + sort_direction)
   end
 
   def show
@@ -50,6 +51,14 @@ class BotsController < ApplicationController
 
   private
   def bot_params
-    params.require(:bot).permit(:name, :description, :image)
+    params.require(:bot).permit(:name, :description, :image, :price, :robot_type)
+  end
+
+  def sort_column
+    Bot.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

@@ -10,7 +10,7 @@ it ("allows you to create a favorite") do
   fill_in 'Password', :with => user.password
   click_button 'Log in'
   click_link 'Bots'
-  click_link 'Favorite'
+  click_link('favorite')
   expect(user.favorites.first.bot_id).to eq(bot.id)
   end
 end

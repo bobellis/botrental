@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "the new user process" do
   it "adds a new user" do
     visit '/'
+    fill_in 'Name', :with => "Bob"
     fill_in 'Email', :with => "david@aol.com"
     fill_in 'Password', :with => "password"
     fill_in 'Password confirmation', :with => "password"

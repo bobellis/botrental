@@ -1,9 +1,10 @@
-<br><span><%= image_tag @bot.image.url(:thumb) %>
+<br><span><%= image_tag @bot.image.url(:medium) %>
 <h1><%= @bot.name %> </h1></span>
 
-<h2>Description: <%= @bot.description %></h2>
-<h3> Reviews: </h3>
+<h3>Description:</h3>
 <br>
+<%= @bot.description %>
+<h3> Reviews: </h3>
 <% @reviews.each do |review| %>
   <h4> <%= review.review_title %></h4>
       by <%= User.find(review.user_id).email %>
@@ -11,13 +12,16 @@
         <br>
         <%= review.review_body %>
         <br>
+        <% if review.user_id === current_user.id %>
+        <%= link_to "Edit Review", edit_rental_path(review) %>
+        <% end %>
 <% end %>
 <br>
 <% if current_user.id === @bot.user_id %>
 <%= link_to "Edit Bot", edit_bot_path %>
 <% else %>
-<%= link_to "Rent This Bot", new_bot_rental_path(bot_id: @bot.id)%>
+<%= link_to "Rent This Bot", new_rental_path(bot_id: @bot.id)%>
 <% end %>
-<% if @bot.users.include?(current_user) %>
-<%= link_to "Review this Bot", new_bot_review_path(@bot) %>
+<% if @bot.users.include?(current_user) && current_user.rentals.find_by(bot_id: @bot.id).review_title === "" %>
+<%= link_to "Review this Bot", edit_rental_path(current_user.rentals.find_by(bot_id: @bot.id)) %>
 <% end %>

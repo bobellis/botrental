@@ -23,12 +23,11 @@ def edit
 end
 
 def update
-  @bot = Bot.find(params[:bot_id])
   @rental = Rental.find(params[:id])
   @rental.update(rental_params)
   if @rental.save
     flash[:notice] = "Your review has been posted."
-    redirect_to bot_path(@bot)
+    redirect_to bot_path(id: @rental.bot_id)
   else
     render :edit
   end

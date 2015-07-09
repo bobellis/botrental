@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {registrations: 'registrations'}
   devise_scope :user do
     authenticated :user do
       root :to => 'bots#index', as: :authenticated_root
@@ -9,12 +9,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bots do
-    resources :rentals
-  end
-
+  resources :bots
+  resources :rentals
   resources :users
-
   resources :favorites
 
 end

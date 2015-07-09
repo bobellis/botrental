@@ -1,19 +1,28 @@
-<h1>My bots</h1>
+<h1>My Bots</h1>
+<table class='table borderless text-center'>
 <% current_user.bots.each do |bot| %>
-<%= bot.name %>
+<tr>
+<td><figure><%= image_tag(bot.image.url(:thumb), alt: 'user image') %>
+  <figcaption><%= bot.name %> </figcaption>
+</figure</td>
+<td>
 <br>
-<%= bot.description %>
+<%= bot.description %></td>
+<td> Rental history:
 <br>
 <% bot.rentals.each do |rental| %>
-Rented by: <%= User.find(rental.user_id).email %>
-<br>
+Rented by <%= User.find(rental.user_id).email %> on <%= rental.date %>
 <% end %>
+</td>
 <% end %>
-
-<h1>My rentals</h1>
+</table>
+<h1>My Rentals</h1>
 <% current_user.rentals.each do |rental| %>
-<%= Bot.find(rental.bot_id).name %>
-<%= link_to "Write A Review", edit_bot_rental_path(Bot.find(rental.bot_id), rental) %>
+<figure>
+<%= image_tag(Bot.find(rental.bot_id).image.url(:thumb)) %>
+<figcaption><%= Bot.find(rental.bot_id).name %></figcaption>
+</figure>
+<%= link_to "Write A Review", edit_rental_path(rental) %>
 <br>
 <% end %>
 
