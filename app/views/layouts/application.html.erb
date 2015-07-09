@@ -7,17 +7,42 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+    <% if current_user %>
+      You are logged in as <%= current_user.email %>
+        <li> <%= link_to("Log Out", destroy_user_session_path, :method => :delete) %> </li>
+      <li> <%= link_to"Your Profile", user_path(current_user) %> </li>
+    <% else %>
+      <li> <%= link_to "Login", new_user_session_path %></li>
+    <li>  <%= link_to "Sign Up", new_user_registration_path %></li>
+    <% end %>
+  </ul>
+    </div>
+  </div>
+</nav>
+<% if notice %>
 <p class="notice"><%= notice %></p>
+<% elsif alert %>
 <p class="alert"><%= alert %></p>
-<% if current_user %>
-You are logged in as <%= current_user.email %>
-<%= link_to("Log Out", destroy_user_session_path, :method => :delete) %>
-<%= link_to"Your Profile", user_path(current_user) %>
-<% else %>
-<%= link_to "Login", new_user_session_path %>
-<%= link_to "Sign Up", new_user_registration_path %>
 <% end %>
+<div class="container">
 <%= yield %>
-<%= link_to "Bots", bots_path %>
+</div>
+<footer class="footer">
+  <div class="container">
+    <br>
+    <span class="footer-button"><%= link_to "Bots", bots_path %></span>
+    <% if current_user %>
+    <span class="footer-button"> <%= link_to "New Bot", new_bot_path %></span>
+    <% if current_user.admin %>
+    <span class="footer-button">  <%= link_to "User Administration", users_path %> </span>
+    <% end %>
+    <% end %>
+  </div>
+</footer>
 </body>
 </html>

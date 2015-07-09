@@ -1,8 +1,15 @@
-<h1>Bot List</h1>
-
+<h1 class="text-center">Bot List</h1>
+<table class='table borderless text-center'>
 <% @bots.each do |bot|%>
-<li><%= link_to bot.name, bot_path(bot) %>
-<%= link_to "Favorite", new_favorite_path(bot_id: bot.id) %></li>
+<tr>
+<td><%= link_to image_tag(bot.image.url(:thumb)), bot_path(bot) %> </td>
+<td><%= link_to bot.name, bot_path(bot) %><td>
+<td><%= link_to new_favorite_path(bot_id: bot.id), class: "btn-glyphicon" do %>
+<i class="glyphicon glyphicon-heart"></i></td>
 <% end %>
-
-<%= link_to "New Bot", new_bot_path %>
+<% if current_user.admin %>
+<td> <%= link_to "Delete Bot", bot_path(bot), :method => :delete, :class => "btn btn-xs btn-danger"%></td>
+<% end %>
+<% end %>
+<end>
+</table>

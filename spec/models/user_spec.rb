@@ -5,4 +5,7 @@ require 'rails_helper'
       user = FactoryGirl.create(:user)
     end
     it { should validate_presence_of :email}
+    it {should have_many :bots}
+    it {should have_many :favorites}
+    it {should have_many :rentals}
   end

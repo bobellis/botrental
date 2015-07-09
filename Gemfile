@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'devise'
 gem 'paperclip', "~> 4.3"
+gem 'bootstrap-sass', '~> 3.3.5'
 
 
 group :development do
@@ -28,4 +29,5 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
